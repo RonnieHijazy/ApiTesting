@@ -27,3 +27,9 @@ Route::prefix('/user')->group(function(){
 	Route::get('/getUser/{id}' , 'api\v1\UserController@show')->middleware('auth:api');
 	Route::post('/createUser' , 'api\v1\UserController@store')->middleware('auth:api');
 });
+
+Route::apiResource('/products' , 'ProductController');
+
+Route::group(['prefix' => 'products'] , function(){
+	Route::apiResource('/{product}/reviews' , 'ReviewController');
+});
